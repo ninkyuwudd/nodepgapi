@@ -39,8 +39,8 @@ app.use(bodyParser.json())
 
 app.post('/pesawat/register', (req, res)=> {
     const pesawats = req.body;
-    let insertQuery = `insert into pesawat(id, namapesawat, asal, tujuan, kelas, tanggalberangkat, tanggalpulang, harga) 
-                       values(${pesawats.id}, '${pesawats.namapesawat}', '${pesawats.asal}', '${pesawats.tujuan}', '${pesawats.kelas}', '${pesawats.tanggalberangkat}', '${pesawats.tanggalpulang}', '${pesawats.harga}')`
+    let insertQuery = `INSERT INTO public.pesawat(namapesawat, asal, tujuan, kelas, tanggalberangkat, tanggalpulang, harga)
+    VALUES ('${pesawats.namapesawat}', '${pesawats.asal}', '${pesawats.tujuan}', '${pesawats.kelas}', '${pesawats.tanggalberangkat}', '${pesawats.tanggalpulang}', '${pesawats.harga}')`
 
     client.query(insertQuery, (err, result)=>{
         if(!err){
@@ -63,7 +63,7 @@ app.put('/pesawat/update/:id', (req, res)=> {
                        tanggalberangkat = '${pesawats.tanggalberangkat}',
                        tanggalpulang = '${pesawats.tanggalpulang}',
                        harga = '${pesawats.harga}'
-                       where id = ${pesawats.id}`
+                       where id = ${req.params.id}`
 
     client.query(updateQuery, (err, result)=>{
         if(!err){
